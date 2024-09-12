@@ -4,12 +4,10 @@ import { ContractItem } from '.';
 import { useRollupContext } from "../../../../context/useRollupContext";
 import { ARBITRUM_SEPOLIA_TESTNET_URL } from "../../../../constants/rollup";
 
-// Mock the useRollupContext hook
 jest.mock("../../../../context/useRollupContext", () => ({
   useRollupContext: jest.fn(),
 }));
 
-// Mock the Tooltip component
 jest.mock('react-tooltip', () => ({
   Tooltip: jest.fn(() => null),
 }));

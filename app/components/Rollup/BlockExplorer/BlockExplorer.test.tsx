@@ -3,21 +3,17 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { BlockExplorer } from ".";
 import { useRollupContext } from "../../../context/useRollupContext";
 
-// Mock the useRollupContext hook
 jest.mock("../../../context/useRollupContext", () => ({
   useRollupContext: jest.fn(),
 }));
 
-// Mock the window.open function
 const mockOpen = jest.fn();
 window.open = mockOpen;
 
 describe("BlockExplorer", () => {
   beforeEach(() => {
-    // Reset mocks before each test
     jest.clearAllMocks();
 
-    // Mock the useRollupContext hook to return a sample rollup object
     (useRollupContext as jest.Mock).mockReturnValue({
       rollup: {
         urls: {

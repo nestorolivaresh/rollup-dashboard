@@ -18,7 +18,7 @@ export function useBalanceOf({
   const isCallEnabled = !!(accountAddress && rpcUrl && chainId);
 
   return useQuery({
-    queryKey: [`${accountAddress}-${accountAddress}`, accountAddress, chainId],
+    queryKey: [`balanceOf-${accountAddress}`, accountAddress, chainId],
     queryFn: async () => {
       const client = createPublicClient({
         chain: arbitrumSepolia,
