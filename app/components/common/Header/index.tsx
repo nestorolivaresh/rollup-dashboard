@@ -1,45 +1,74 @@
-import { useAccountModal, useConnectModal } from "@rainbow-me/rainbowkit";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { Button } from "../Button";
-import { Wallet } from "lucide-react";
-import { useAccount } from "wagmi";
-import { useMemo } from "react";
-import { formatWalletAddress } from "@/app/utils/formatWalletAddress";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 export const Header = () => {
-  const { openConnectModal } = useConnectModal();
-  const { openAccountModal } = useAccountModal();
   const pathname = usePathname();
 
-  const { address } = useAccount();
-
-  const handleButtonClick = () => {
-    if (address) {
-      openAccountModal!();
-      return;
-    }
-    openConnectModal!();
-  };
-
-  const buttonContent = useMemo(() => {
-    if (address) {
-      return formatWalletAddress(address);
-    }
-    return "Connect Wallet";
-  }, [address]);
-
   return (
-    <header className="w-full flex justify-end mt-[24px]">
+    <header className="w-full flex mt-4 sm:mt-6 px-4 sm:px-6">
       {pathname !== "/" && (
-        <Button
-          className="w-full max-w-[240px]"
-          onClick={handleButtonClick}
-          icon={
-            address && <Wallet size={20} color="#000" className="mr-[8px]" />
-          }
-        >
-          <span className="text-[#000]">{buttonContent}</span>
-        </Button>
+        <div className="w-full flex items-center justify-between">
+          <div className="flex items-center w-[100px] h-[50px] rounded-lg flex-shrink-0">
+            <Image
+              src="/gelato-logo.svg"
+              alt="logo"
+              width={150}
+              height={100}
+              layout="responsive"
+            />
+          </div>
+          <ConnectButton.Custom>
+            {({
+              account,
+              chain,
+              openAccountModal,
+              openConnectModal,
+              authenticationStatus,
+              mounted,
+            }) => {
+              const ready = mounted && authenticationStatus !== "loading";
+              const connected =
+                ready &&
+                account &&
+                chain &&
+                (!authenticationStatus ||
+                  authenticationStatus === "authenticated");
+
+              return (
+                <div
+                  className={`${
+                    !ready ? "opacity-0 pointer-events-none select-none" : ""
+                  }`}
+                  aria-hidden={!ready}
+                >
+                  {(() => {
+                    if (!connected) {
+                      return (
+                        <Button
+                          onClick={openConnectModal}
+                          className="w-full sm:w-[170px] text-xs sm:text-sm py-2 px-3 sm:py-2 sm:px-4"
+                        >
+                          Connect Wallet
+                        </Button>
+                      );
+                    }
+
+                    return (
+                      <Button
+                        onClick={openAccountModal}
+                        className="w-full sm:w-[150px] text-xs sm:text-sm py-2 px-3 sm:py-2 sm:px-4 border border-[#272727] rounded-lg hover:border-[#807872] bg-transparent text-white truncate"
+                      >
+                        {account.displayName}
+                      </Button>
+                    );
+                  })()}
+                </div>
+              );
+            }}
+          </ConnectButton.Custom>
+        </div>
       )}
     </header>
   );

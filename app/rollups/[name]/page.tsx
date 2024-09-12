@@ -15,17 +15,19 @@ export default function RollupPage() {
 
   return (
     <RollupProvider name={name as string}>
-      <main className="w-full min-w-[1200px] mt-[24px]">
+      <main className="w-full px-4 sm:px-6 lg:px-8 mt-6 sm:mt-8 lg:mt-10">
         <Header />
-        <div className="w-full flex">
-          <div className="w-full mr-[12px]">
+        <div className="w-full flex flex-col lg:flex-row mt-6 space-y-6 lg:space-y-0 lg:space-x-6">
+          <div className="w-full lg:w-3/4 space-y-6">
             <Balances />
             <RPC />
             <Contracts />
             <BlockExplorer />
             <Transactions />
           </div>
-          <ChainInfo />
+          <div className="w-full lg:w-1/4">
+            <ChainInfo />
+          </div>
         </div>
       </main>
     </RollupProvider>

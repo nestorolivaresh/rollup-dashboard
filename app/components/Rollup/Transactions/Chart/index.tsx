@@ -27,6 +27,25 @@ export const Chart: React.FC = () => {
           show: false,
         },
       },
+      responsive: [
+        {
+          breakpoint: 768,
+          options: {
+            chart: {
+              width: 300,
+            },
+          },
+        },
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: '100%',
+              height: '100%',
+            },
+          },
+        },
+      ],
       xaxis: {
         categories: dataToDisplay.map((item) => item.time),
         title: {
@@ -127,7 +146,7 @@ export const Chart: React.FC = () => {
   }
 
   return (
-    <div className="w-full h-[240px] cursor-pointer">
+    <div className="w-full sm:h-[250px] cursor-pointer">
       <ApexChart
         options={options}
         series={series}

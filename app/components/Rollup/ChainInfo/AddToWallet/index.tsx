@@ -1,6 +1,7 @@
 import { Button } from "@/app/components/common/Button";
 import { useRollupContext } from "@/app/context/useRollupContext";
 import { Wallet } from "lucide-react";
+import { toast } from "react-toastify";
 import { useWalletClient } from "wagmi";
 
 export const AddToWallet = () => {
@@ -9,16 +10,16 @@ export const AddToWallet = () => {
 
   const addNetwork = async () => {
     if (!window.ethereum) {
-      alert("MetaMask is not installed!");
+      toast.error("You don't have a wallet installed!");
       return;
     }
 
     try {
-      await window.ethereum.request({
+      const res = await window.ethereum.request({
         method: "wallet_addEthereumChain",
         params: [
           {
-            chainId: `0x${rollup?.chain?.chainId?.toString(16)}`, 
+            chainId: `0x${rollup?.chain?.chainId?.toString(16)}`,
             chainName: rollup?.name,
             nativeCurrency: {
               name: rollup?.chain?.nativeCurrency.name,
@@ -30,11 +31,13 @@ export const AddToWallet = () => {
           },
         ],
       });
+      console.log({ res });
 
       // After adding the network, switch to it
       walletClient?.switchChain({ id: rollup?.chain?.chainId });
     } catch (error) {
       console.error("Failed to add network:", error);
+      toast.error("Failed to add network!");
     }
   };
 

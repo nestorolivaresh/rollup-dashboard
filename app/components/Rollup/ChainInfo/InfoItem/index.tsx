@@ -40,21 +40,37 @@ export const InfoItem = ({ category, value, className }: InfoItemProps) => {
   }, [category]);
 
   return (
-    <div className={`w-fit bg-[#1c1c1c] flex items-center p-[6px] mb-[6px] border border-[#272727] ${category === "token" ? "rounded-[100px]" : "rounded-[4px]"} ${className}`}>
+    <div
+      className={`
+        inline-flex flex-wrap items-center
+        p-1.5 sm:p-2 sm:mb-2
+        bg-[#1c1c1c] border border-[#272727]
+        ${category === "token" ? "rounded-full" : "rounded"}
+        ${className}
+      `}
+    >
       {category !== "chainId" && (
-        // eslint-disable-next-line @next/next/no-img-element
         <img
           src={itemIconUrl}
           alt={`${category}-${value}`}
-          width={16}
-          height={16}
-          className={`mr-[6px] ${category === "token" ? "rounded-full" : ""}`}
+          width={20}
+          height={20}
+          className={`
+            mr-1.5 sm:mr-2
+            ${category === "token" ? "rounded-full" : ""}
+          `}
         />
       )}
-      <span className={`text-sm text-[#FFEFE3] font-bold mr-[6px] ${category === 'da' ? 'uppercase' : 'capitalize'}`}>
+      <span
+        className={`
+        text-xs sm:text-sm text-[#FFEFE3] font-bold 
+        mr-1.5 sm:mr-2
+        ${category === "da" ? "uppercase" : "capitalize"}
+      `}
+      >
         {value}
       </span>
-      <span className="text-sm text-[#CCBFB6] capitalize mr-[6px]">
+      <span className="text-xs sm:text-sm text-[#CCBFB6] capitalize">
         {formattedCategory}
       </span>
     </div>

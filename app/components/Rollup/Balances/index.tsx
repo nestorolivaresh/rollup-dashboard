@@ -40,32 +40,32 @@ export const Balances = () => {
   }, [validatorBalance]);
 
   return (
-    <Card className="min-h-[72px] flex-col items-start">
-      <div className="w-full flex items-center">
-        <div className="w-full flex items-center">
-          <div className="w-[40px] h-[40px] flex items-center justify-center mr-[12px] bg-[#1c1c1c] rounded-md">
+    <Card className="min-h-[72px] flex-col items-start p-4">
+      <div className="w-full flex flex-col sm:flex-row items-start sm:items-center">
+        <div className="w-full flex items-center mb-4 sm:mb-0">
+          <div className="w-[40px] h-[40px] flex items-center justify-center mr-3 bg-[#1c1c1c] rounded-md">
             <Scale className="text-[#807872]" size={20} />
           </div>
           <div className="flex flex-col">
             <span className="text-[#FFEFE3] text-sm font-medium">Balances</span>
           </div>
         </div>
-        <div className="w-full flex justify-end">
-          <div className="flex justify-center mr-[40px]">
+        <div className="w-full flex flex-col sm:flex-row sm:justify-end space-y-2 sm:space-y-0 sm:space-x-4">
+          <div className="flex items-center">
             {isBatcherBalanceLow && (
-              <div className="flex items-center">
-                <CircleAlert className="text-[#eed202] mr-[6px]" size={12} />
+              <div className="flex items-center mr-2">
+                <CircleAlert className="text-[#eed202]" size={12} />
               </div>
             )}
             <span
-              className={`text-[#CCBFB6] text-sm font-medium mr-[6px] ${
+              className={`text-[#CCBFB6] text-sm font-medium mr-2 ${
                 isBatcherBalanceLow ? "text-[#eed202]" : ""
               }`}
             >
               Batcher
             </span>
             {isBatcherBalanceLoading || loadingRollupData ? (
-              <Skeleton className="w-[100px] h-full" />
+              <Skeleton className="w-[100px] h-5" />
             ) : (
               <span
                 className={`text-[#FFEFE3] text-sm font-medium ${
@@ -77,21 +77,21 @@ export const Balances = () => {
               </span>
             )}
           </div>
-          <div className="flex justify-center">
+          <div className="flex items-center">
             {isValidatorBalanceLow && (
-              <div className="flex items-center">
-                <CircleAlert className="text-[#eed202] mr-[6px]" size={12} />
+              <div className="flex items-center mr-2">
+                <CircleAlert className="text-[#eed202]" size={12} />
               </div>
             )}
             <span
-              className={`text-[#CCBFB6] text-sm font-medium mr-[6px] ${
+              className={`text-[#CCBFB6] text-sm font-medium mr-2 ${
                 isValidatorBalanceLow ? "text-[#eed202]" : ""
               }`}
             >
               Validator
             </span>
             {isValidatorBalanceLoading || loadingRollupData ? (
-              <Skeleton className="w-[100px] h-full" />
+              <Skeleton className="w-[100px] h-5" />
             ) : (
               <span
                 className={`text-[#FFEFE3] text-sm font-medium ${
@@ -105,16 +105,14 @@ export const Balances = () => {
           </div>
         </div>
       </div>
-      {isBatcherBalanceLow ||
-        (isValidatorBalanceLow && (
-          <div className="w-full mt-[12px]">
-            <span className="text-[#eed202] text-sm font-medium">
-              The highlighted balances are low. Please add funds to the
-              corresponding account to ensure the correct operation of the
-              rollup.
-            </span>
-          </div>
-        ))}
+      {(isBatcherBalanceLow || isValidatorBalanceLow) && (
+        <div className="w-full mt-3">
+          <span className="text-[#eed202] text-sm font-medium">
+            The highlighted balances are low. Please add funds to the
+            corresponding account to ensure the correct operation of the rollup.
+          </span>
+        </div>
+      )}
     </Card>
   );
 };
