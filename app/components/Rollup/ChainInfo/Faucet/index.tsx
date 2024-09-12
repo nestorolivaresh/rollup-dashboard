@@ -1,16 +1,31 @@
 import { Button } from "@/app/components/common/Button";
 import { Card } from "@/app/components/common/Card";
 import { faucetContract } from "@/app/constants/contracts";
+import { useRollupContext } from "@/app/context/useRollupContext";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { HandHelping } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { toast } from "react-toastify";
-import { useAccount, useWriteContract } from "wagmi";
+import {
+  useAccount,
+  useSwitchChain,
+  useWaitForTransactionReceipt,
+  useWriteContract,
+} from "wagmi";
 
 export const Faucet = () => {
-  const { isConnected } = useAccount();
+  const { isConnected, chain } = useAccount();
   const { openConnectModal } = useConnectModal();
   const { data: hash, isPending, writeContract, error } = useWriteContract();
+  const { rollup } = useRollupContext();
+  const { switchChain, isPending: isSwitchNetworkPending } = useSwitchChain();
+  const {
+    data: transactionReceipt,
+    isPending: isPendingTransactionReceipt,
+    error: errorTransactionReceipt,
+  } = useWaitForTransactionReceipt({
+    hash,
+  });
 
   const handleRequest = async () => {
     await writeContract({
@@ -21,19 +36,61 @@ export const Faucet = () => {
     });
   };
 
-  useEffect(() => {
-    if (hash) {
-      toast.success("Tokens requested successfully");
+  const buttonContent = useMemo(() => {
+    if (!isConnected) {
+      return (
+        <Button className="justify-end self-end" onClick={openConnectModal!}>
+          Connect Wallet
+        </Button>
+      );
     }
-  }, [hash]);
+
+    const settlementId = rollup?.chain?.settlement?.chainId;
+    if (chain?.id !== settlementId) {
+      return (
+        <Button
+          className="justify-end self-end"
+          onClick={() => switchChain({ chainId: settlementId as number })}
+          disabled={isSwitchNetworkPending}
+          loading={isSwitchNetworkPending}
+        >
+          Switch Network
+        </Button>
+      );
+    }
+
+    return (
+      <Button
+        className="justify-end self-end"
+        onClick={() => handleRequest()}
+        disabled={isPending}
+        loading={isPending}
+      >
+        Request
+      </Button>
+    );
+  }, [
+    chain,
+    rollup?.chain?.settlement?.chainId,
+    isConnected,
+    isPending,
+    isSwitchNetworkPending,
+    isPendingTransactionReceipt,
+  ]);
 
   useEffect(() => {
-    if (error) {
+    if (transactionReceipt) {
+      toast.success("Tokens added successfully!");
+    }
+  }, [transactionReceipt]);
+
+  useEffect(() => {
+    if (error || errorTransactionReceipt) {
       toast.error(
         "An error occurred while requesting tokens. Please try again later."
       );
     }
-  }, [error]);
+  }, [error, errorTransactionReceipt]);
 
   return (
     <Card className="flex-col !mt-[40px]">
@@ -54,20 +111,7 @@ export const Faucet = () => {
           </div>
         </div>
       </div>
-      {isConnected ? (
-        <Button
-          className="justify-end self-end"
-          onClick={() => handleRequest()}
-          disabled={isPending}
-          loading={isPending}
-        >
-          Request
-        </Button>
-      ) : (
-        <Button className="justify-end self-end" onClick={openConnectModal!}>
-          Connect Wallet
-        </Button>
-      )}
+      {buttonContent}
     </Card>
   );
 };
