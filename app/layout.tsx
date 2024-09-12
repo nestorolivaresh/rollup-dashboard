@@ -14,6 +14,7 @@ import {
 import { WagmiProvider } from "wagmi";
 import { Header } from "./components/common/Header";
 import { ToastContainer } from "react-toastify";
+import { ViewTransitions } from "next-view-transitions";
 
 const inter = Inter({ subsets: ["latin"] });
 const queryClient = new QueryClient();
@@ -30,20 +31,22 @@ export default function RootLayout({
   });
 
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <WagmiProvider config={config}>
-          <QueryClientProvider client={queryClient}>
-            <RainbowKitProvider theme={darkTheme()} modalSize="compact">
-              <div className="mx-auto w-full max-w-[1200px]">
-                <Header />
-                {children}
-                <ToastContainer theme="dark" />
-              </div>
-            </RainbowKitProvider>
-          </QueryClientProvider>
-        </WagmiProvider>
-      </body>
-    </html>
+    <ViewTransitions>
+      <html lang="en">
+        <body className={inter.className}>
+          <WagmiProvider config={config}>
+            <QueryClientProvider client={queryClient}>
+              <RainbowKitProvider theme={darkTheme()} modalSize="compact">
+                <div className="mx-auto w-full max-w-[1200px]">
+                  <Header />
+                  {children}
+                  <ToastContainer theme="dark" />
+                </div>
+              </RainbowKitProvider>
+            </QueryClientProvider>
+          </WagmiProvider>
+        </body>
+      </html>
+    </ViewTransitions>
   );
 }
