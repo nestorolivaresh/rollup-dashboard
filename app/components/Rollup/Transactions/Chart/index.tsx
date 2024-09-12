@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import dynamic from "next/dynamic";
 import { useRollupContext } from "@/app/context/useRollupContext";
 import { formatTransactionsDataForChart } from "@/app/utils/formatTransactionsDataForChart";

@@ -1,7 +1,5 @@
-import React from 'react';
 import { render, fireEvent, act } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
-
 import { useAccount, useWriteContract } from 'wagmi';
 import { useConnectModal } from '@rainbow-me/rainbowkit';
 import { toast } from 'react-toastify';
@@ -101,7 +99,7 @@ describe('Faucet Component', () => {
     expect(toast.error).toHaveBeenCalledWith('An error occurred while requesting tokens. Please try again later.');
   });
 
-  it('disables the "Request" button while transaction is pending', () => {
+  it('displays loading state when transaction is pending', () => {
     (useAccount as jest.Mock).mockReturnValue({ isConnected: true });
     (useWriteContract as jest.Mock).mockReturnValue({ 
       writeContract: mockWriteContract,
@@ -111,6 +109,6 @@ describe('Faucet Component', () => {
     });
     
     render(<Faucet />);
-    expect(screen.getByText('Request')).toBeDisabled();
+    expect(screen.getByTestId('circle-loader')).toBeInTheDocument();
   });
 });

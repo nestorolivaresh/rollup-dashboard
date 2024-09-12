@@ -1,4 +1,4 @@
-import React, { createContext, useContext, ReactNode } from "react";
+import { createContext, useContext, ReactNode } from "react";
 import { useGetRollup } from "../hooks/useGetRollup";
 import { RollupPublic } from "../types/rollupPublic";
 import { RollupTransactions } from "../types/rollupTransactions";

@@ -4,9 +4,24 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { Button } from "../Button";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import { useDisconnect } from "wagmi";
+import { useState } from "react";
+import { Tooltip } from "react-tooltip";
 
 export const Header = () => {
   const pathname = usePathname();
+  const { disconnect } = useDisconnect();
+  const [isCopied, setIsCopied] = useState(false);
+
+  const handleClickAddress = async (address: string) => {
+    try {
+      await navigator.clipboard.writeText(address);
+      setIsCopied(true);
+      setTimeout(() => setIsCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy text: ", err);
+    }
+  };
 
   return (
     <header className="w-full flex mt-4 sm:mt-6 px-4 sm:px-6">
@@ -25,7 +40,6 @@ export const Header = () => {
             {({
               account,
               chain,
-              openAccountModal,
               openConnectModal,
               authenticationStatus,
               mounted,
@@ -58,18 +72,31 @@ export const Header = () => {
                     }
 
                     return (
-                      <Button
-                        onClick={openAccountModal}
-                        className="w-full sm:w-[150px] text-xs sm:text-sm py-2 px-3 sm:py-2 sm:px-4 border border-[#272727] rounded-lg hover:border-[#807872] bg-transparent text-white truncate"
-                      >
-                        {account.displayName}
-                      </Button>
+                      <div className="flex">
+                        <Button
+                          onClick={() => handleClickAddress(account.address)}
+                          className="w-full sm:w-[150px] text-xs sm:text-sm py-2 px-3 sm:py-2 sm:px-4 border border-[#272727] rounded-lg hover:border-[#807872] bg-transparent text-white truncate mr-2"
+                          data-tooltip-id="copy-user-address-tooltip"
+                        >
+                          {account.displayName}
+                        </Button>
+                        <Button
+                          onClick={() => disconnect()}
+                          className="w-full sm:w-[150px] text-xs sm:text-sm py-2 px-3 sm:py-2 sm:px-4 border border-[#272727] rounded-lg hover:border-[#807872] bg-transparent text-white"
+                        >
+                          Disconnect
+                        </Button>
+                      </div>
                     );
                   })()}
                 </div>
               );
             }}
           </ConnectButton.Custom>
+          <Tooltip
+            id="copy-user-address-tooltip"
+            content={isCopied ? "Copied!" : "Copy to clipboard"}
+          />
         </div>
       )}
     </header>

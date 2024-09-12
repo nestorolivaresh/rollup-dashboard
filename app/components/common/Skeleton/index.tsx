@@ -7,7 +7,7 @@ export const Skeleton: React.FC<SkeletonLoaderProps> = ({
   className,
 }) => {
   return (
-    <div className="w-full mx-auto">
+    <div className="w-full mx-auto" data-testid="skeleton">
       {Array.from({ length: lines }).map((_, index) => (
         <div
           className={`animate-pulse bg-[#272727] rounded ${className}`}

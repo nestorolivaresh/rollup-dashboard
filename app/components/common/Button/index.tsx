@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { CircleLoader } from "../CircleLoader";
 
 export interface ButtonProps {
   children: React.ReactNode;
@@ -6,6 +7,7 @@ export interface ButtonProps {
   icon?: React.ReactNode;
   className?: string;
   disabled?: boolean;
+  loading?: boolean;
 }
 
 export const Button = ({
@@ -14,8 +16,14 @@ export const Button = ({
   icon,
   className,
   disabled,
+  loading,
+  ...rest
 }: ButtonProps) => {
   const content = useMemo(() => {
+    if (loading) {
+      return <CircleLoader />;
+    }
+
     if (icon) {
       return (
         <div className="flex items-center justify-center">
@@ -25,7 +33,7 @@ export const Button = ({
       );
     }
     return children;
-  }, [children, icon]);
+  }, [children, icon, loading]);
 
   return (
     <button
@@ -34,6 +42,7 @@ export const Button = ({
         ${className}`}
       onClick={onClick}
       disabled={disabled}
+      {...rest}
     >
       {content}
     </button>

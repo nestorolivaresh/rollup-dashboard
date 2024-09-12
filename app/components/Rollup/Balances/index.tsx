@@ -62,7 +62,7 @@ export const Balances = () => {
                 isBatcherBalanceLow ? "text-[#eed202]" : ""
               }`}
             >
-              Batcher
+              Batch Poster
             </span>
             {isBatcherBalanceLoading || loadingRollupData ? (
               <Skeleton className="w-[100px] h-5" />

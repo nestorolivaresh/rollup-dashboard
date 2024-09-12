@@ -8,7 +8,7 @@ export const Transactions = () => {
   const { loadingTransactionsData, loadingRollupData } = useRollupContext();
 
   return (
-    <Card className="w-full flex flex-col mt-4 p-4">
+    <Card className="w-full flex flex-col !mb-[20px]">
       <div className="w-full flex items-start sm:items-center">
         <div className="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-[#1c1c1c] rounded-md mr-3">
           <Zap size={20} color="#807872" />
@@ -25,7 +25,7 @@ export const Transactions = () => {
       <div className="w-full mt-4">
         {loadingTransactionsData || loadingRollupData ? (
           <div className="w-full h-40 sm:h-60">
-            <Skeleton className="w-full h-full" />
+            <Skeleton className="w-full h-40 sm:h-60" />
           </div>
         ) : (
           <div className="w-full h-40 sm:h-60">

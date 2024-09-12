@@ -17,7 +17,6 @@ export const ContractItem = ({ label, address, isL2 }: ContractItemProps) => {
 
   const handleCopy = async (
     text: string,
-    setIsCopied: (value: boolean) => void
   ) => {
     try {
       await navigator.clipboard.writeText(text);
@@ -63,12 +62,12 @@ export const ContractItem = ({ label, address, isL2 }: ContractItemProps) => {
               {address}
             </a>
             <button
-              onClick={() => handleCopy(address, setIsCopied)}
+              onClick={() => handleCopy(address)}
               data-tooltip-id={`${address}-copy-tooltip-${isL2 ? "l2" : "l1"}`}
               className="p-1 hover:bg-gray-700 rounded"
             >
               {isCopied ? (
-                <Check size={16} className="text-green-500" />
+                <Check size={16} className="text-green-500" data-testid="check-icon" />
               ) : (
                 <Copy size={16} className="text-[#CCBFB6]" />
               )}

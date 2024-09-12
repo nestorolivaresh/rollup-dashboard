@@ -2,7 +2,7 @@ import { Telescope } from "lucide-react";
 import { Card } from "../../common/Card";
 import { Button } from "../../common/Button";
 import { useState } from "react";
-import { useRollupContext } from "@/app/context/useRollupContext";
+import { useRollupContext } from "../../../context/useRollupContext";
 
 export const BlockExplorer = () => {
   const [searchInput, setSearchInput] = useState<string>("");
