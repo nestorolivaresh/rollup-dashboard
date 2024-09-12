@@ -15,6 +15,22 @@ export const AddToWallet = () => {
     }
 
     try {
+      await window.ethereum.request({
+        method: "wallet_addEthereumChain",
+        params: [
+          {
+            chainId: `0x${rollup?.chain?.chainId?.toString(16)}`,
+            chainName: rollup?.name,
+            nativeCurrency: {
+              name: rollup?.chain?.nativeCurrency.name,
+              symbol: rollup?.chain?.nativeCurrency.symbol,
+              decimals: rollup?.chain?.nativeCurrency.decimals,
+            },
+            rpcUrls: [rollup?.urls?.l2?.http],
+            blockExplorerUrls: [rollup?.urls?.l2?.explorer],
+          },
+        ],
+      });
       await walletClient?.switchChain({ id: rollup?.chain?.chainId as number });
     } catch (error) {
       console.error("Failed to add network:", error);
