@@ -9,11 +9,23 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        fontFamily: {
+          sans: 'var(--font-inter)',
+        },
         background: "var(--background)",
         foreground: "var(--foreground)",
+        'custom-green': "#69FFD7",
       },
     },
   },
   plugins: [],
+  safelist: [
+    'text-yellow-500',
+    'text-custom-green',
+    'text-red-500',
+    'border-yellow-500',
+    'border-custom-green',
+    'border-red-500',
+  ],
 };
 export default config;
