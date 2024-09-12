@@ -15,7 +15,7 @@ export const AddToWallet = () => {
     }
 
     try {
-      const res = await window.ethereum.request({
+      await window.ethereum.request({
         method: "wallet_addEthereumChain",
         params: [
           {
@@ -31,8 +31,6 @@ export const AddToWallet = () => {
           },
         ],
       });
-      console.log({ res });
-
       // After adding the network, switch to it
       walletClient?.switchChain({ id: rollup?.chain?.chainId });
     } catch (error) {
