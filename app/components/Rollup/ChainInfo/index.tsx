@@ -4,6 +4,7 @@ import { useRollupContext } from "@/app/context/useRollupContext";
 import { ExternalLinks } from "./ExternalLinks";
 import { AddToWallet } from "./AddToWallet";
 import { Skeleton } from "../../common/Skeleton";
+import { Faucet } from "./Faucet";
 
 export const ChainInfo = () => {
   const { rollup, loadingRollupData } = useRollupContext();
@@ -60,6 +61,7 @@ export const ChainInfo = () => {
               label="Block Explorer"
               icon={<Box size={20} color="#CCBFB6" className="mr-2" />}
             />
+            <Faucet />
           </>
         )}
       </div>
