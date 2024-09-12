@@ -5,13 +5,18 @@ import { RollupTransactions } from "../types/rollupTransactions";
 import { useGetRollupTransactions } from "../hooks/useGetRollupTransactions";
 
 interface RollupContextType {
-  rollup: RollupPublic;
-  transactions: RollupTransactions;
+  rollup: RollupPublic | null;
+  transactions: RollupTransactions | null;
   loadingRollupData: boolean;
   loadingTransactionsData: boolean;
 }
 
-const RollupContext = createContext<RollupContextType | undefined>(undefined);
+const RollupContext = createContext<RollupContextType | undefined>({
+  rollup: null,
+  transactions: null,
+  loadingRollupData: true,
+  loadingTransactionsData: true,
+});
 
 export const useRollupContext = () => {
   const context = useContext(RollupContext);

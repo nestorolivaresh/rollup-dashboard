@@ -32,7 +32,7 @@ export const AddToWallet = () => {
         ],
       });
       // After adding the network, switch to it
-      walletClient?.switchChain({ id: rollup?.chain?.chainId });
+      walletClient?.switchChain({ id: rollup?.chain?.chainId as number });
     } catch (error) {
       console.error("Failed to add network:", error);
       toast.error("Failed to add network!");

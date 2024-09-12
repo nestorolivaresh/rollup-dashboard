@@ -12,15 +12,15 @@ export const Balances = () => {
   const { data: batcherBalance, isLoading: isBatcherBalanceLoading } =
     useBalanceOf({
       accountAddress: rollup?.addresses?.accounts?.sequencer as `0x${string}`,
-      rpcUrl: rollup?.urls?.l2?.http,
-      chainId: rollup?.chain?.settlement?.chainId,
+      rpcUrl: rollup?.urls?.l2?.http as string,
+      chainId: rollup?.chain?.settlement?.chainId as number,
     });
 
   const { data: validatorBalance, isLoading: isValidatorBalanceLoading } =
     useBalanceOf({
       accountAddress: rollup?.addresses?.accounts?.settlement as `0x${string}`,
-      rpcUrl: rollup?.urls?.l2?.http,
-      chainId: rollup?.chain?.settlement?.chainId,
+      rpcUrl: rollup?.urls?.l2?.http as string,
+      chainId: rollup?.chain?.settlement?.chainId as number,
     });
 
   const formattedBatcherBalance = useMemo(() => {

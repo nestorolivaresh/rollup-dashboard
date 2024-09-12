@@ -29,27 +29,30 @@ export const ChainInfo = () => {
           </>
         ) : (
           <>
-            <InfoItem category="framework" value={rollup?.chain?.stack} />
+            <InfoItem
+              category="framework"
+              value={rollup?.chain?.stack as string}
+            />
             <InfoItem
               category="settlement"
-              value={rollup?.chain?.settlement?.name}
+              value={rollup?.chain?.settlement?.name as string}
             />
             <InfoItem
               category="da"
-              value={rollup?.chain?.dataAvailability?.name}
+              value={rollup?.chain?.dataAvailability?.name as string}
             />
             <InfoItem
               category="token"
-              value={rollup?.chain?.nativeCurrency?.symbol}
+              value={rollup?.chain?.nativeCurrency?.symbol as string}
               className="my-6"
             />
             <InfoItem
               category="chainId"
-              value={rollup?.chain?.chainId}
+              value={rollup?.chain?.chainId as number}
               className="mb-6"
             />
             <ExternalLinks
-              link={rollup?.urls?.bridge?.ui}
+              link={rollup?.urls?.bridge?.ui as string}
               label="Bridge"
               icon={
                 <ArrowRightLeft size={20} color="#CCBFB6" className="mr-2" />
@@ -57,7 +60,7 @@ export const ChainInfo = () => {
               className="mb-2"
             />
             <ExternalLinks
-              link={rollup?.urls?.l2?.explorer}
+              link={rollup?.urls?.l2?.explorer as string}
               label="Block Explorer"
               icon={<Box size={20} color="#CCBFB6" className="mr-2" />}
             />

@@ -46,13 +46,13 @@ export const RPC = () => {
                 </span>
                 <button
                   onClick={() =>
-                    handleCopy(rollup?.urls?.l2?.http, setIsHttpCopied)
+                    handleCopy(rollup?.urls?.l2?.http as string, setIsHttpCopied)
                   }
                   data-tooltip-id="copy-http-tooltip"
                   className="p-1 hover:bg-gray-700 rounded"
                 >
                   {isHttpCopied ? (
-                    <Check size={16} className="text-green-500" />
+                    <Check size={16} className="text-green-500"  />
                   ) : (
                     <Copy size={16} className="text-[#CCBFB6]" />
                   )}
@@ -77,7 +77,7 @@ export const RPC = () => {
                 </span>
                 <button
                   onClick={() =>
-                    handleCopy(rollup?.urls?.l2?.ws, setIsWsCopied)
+                    handleCopy(rollup?.urls?.l2?.ws as string, setIsWsCopied)
                   }
                   data-tooltip-id="copy-ws-tooltip"
                   className="p-1 hover:bg-gray-700 rounded"
