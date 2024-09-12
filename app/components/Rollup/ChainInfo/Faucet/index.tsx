@@ -63,8 +63,8 @@ export const Faucet = () => {
       <Button
         className="justify-end self-end"
         onClick={() => handleRequest()}
-        disabled={isPending}
-        loading={isPending}
+        disabled={isPending || isPendingTransactionReceipt}
+        loading={isPending || isPendingTransactionReceipt}
       >
         Request
       </Button>
