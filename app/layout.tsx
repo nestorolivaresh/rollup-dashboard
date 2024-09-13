@@ -33,7 +33,7 @@ export default function RootLayout({
   return (
     <ViewTransitions>
       <html lang="en">
-        <body className={inter.className}>
+        <body className={`${inter.className} bg-[#000] text-[#fff]`}>
           <WagmiProvider config={config}>
             <QueryClientProvider client={queryClient}>
               <RainbowKitProvider theme={darkTheme()} modalSize="compact">

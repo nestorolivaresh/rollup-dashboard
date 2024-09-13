@@ -21,7 +21,6 @@ export const Faucet = () => {
   const { switchChain, isPending: isSwitchNetworkPending } = useSwitchChain();
   const {
     data: transactionReceipt,
-    isPending: isPendingTransactionReceipt,
     error: errorTransactionReceipt,
   } = useWaitForTransactionReceipt({
     hash,
@@ -63,8 +62,8 @@ export const Faucet = () => {
       <Button
         className="justify-end self-end"
         onClick={() => handleRequest()}
-        disabled={isPending || isPendingTransactionReceipt}
-        loading={isPending || isPendingTransactionReceipt}
+        disabled={isPending}
+        loading={isPending}
       >
         Request
       </Button>
@@ -75,7 +74,6 @@ export const Faucet = () => {
     isConnected,
     isPending,
     isSwitchNetworkPending,
-    isPendingTransactionReceipt,
   ]);
 
   useEffect(() => {
