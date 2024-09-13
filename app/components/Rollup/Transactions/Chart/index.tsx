@@ -29,19 +29,17 @@ export const Chart: React.FC = () => {
       },
       responsive: [
         {
-          breakpoint: 768,
-          options: {
-            chart: {
-              width: 300,
-            },
-          },
-        },
-        {
           breakpoint: 480,
           options: {
             chart: {
-              width: '100%',
-              height: '100%',
+              width: "100%",
+              height: "100%",
+            },
+            xaxis: {
+              labels: {
+                rotate: -45, // Rotate labels on mobile
+                rotateAlways: true,
+              },
             },
           },
         },
@@ -69,7 +67,7 @@ export const Chart: React.FC = () => {
         axisTicks: {
           show: false,
         },
-        tickAmount: 8
+        tickAmount: 8,
       },
       yaxis: {
         tickAmount: 5,
