@@ -49,7 +49,7 @@ export const Chart: React.FC = () => {
       xaxis: {
         categories: dataToDisplay.map((item) => item.time),
         title: {
-          text: "Time (hours ago)",
+          text: "Time of Day",
           style: {
             fontSize: "14px",
             fontWeight: 600,
@@ -57,6 +57,8 @@ export const Chart: React.FC = () => {
           },
         },
         labels: {
+          rotate: 0,
+          rotateAlways: false,
           style: {
             colors: "#807872",
           },
@@ -67,6 +69,7 @@ export const Chart: React.FC = () => {
         axisTicks: {
           show: false,
         },
+        tickAmount: 8
       },
       yaxis: {
         tickAmount: 5,
@@ -124,7 +127,7 @@ export const Chart: React.FC = () => {
           formatter: (val: number) => `${val}`,
         },
         x: {
-          formatter: (val: number) => `${val} hours ago`,
+          formatter: (val: number) => `${val}`,
         },
       },
     }),

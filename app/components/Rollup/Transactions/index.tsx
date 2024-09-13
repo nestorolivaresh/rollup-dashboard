@@ -18,7 +18,7 @@ export const Transactions = () => {
             Transactions
           </span>
           <span className="text-[#807872] text-xs sm:text-sm">
-            Updated hourly
+            Updated hourly and displaying data from 24 hours ago
           </span>
         </div>
       </div>

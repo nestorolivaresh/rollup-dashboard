@@ -1,8 +1,9 @@
-export const formatTimestamp = (timestamp: number) => {
-  const now = new Date();
+export const formatTimestamp = (timestamp: number): string => {
+  if (!timestamp) return "Invalid Timestamp";
   const date = new Date(timestamp);
-  const diffInHours = Math.floor(
-    (now.getTime() - date.getTime()) / (1000 * 60 * 60)
-  );
-  return diffInHours;
+  return date.toLocaleTimeString("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  });
 };
