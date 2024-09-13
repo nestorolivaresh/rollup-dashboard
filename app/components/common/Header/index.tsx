@@ -27,7 +27,10 @@ export const Header = () => {
     <header className="w-full flex mt-4 sm:mt-6 px-4 sm:px-6">
       {pathname !== "/" && (
         <div className="w-full flex items-center justify-between">
-          <div className="flex items-center w-[100px] h-[50px] rounded-lg flex-shrink-0">
+          <div
+            className="flex items-center w-[100px] h-[50px] rounded-lg flex-shrink-0 cursor-pointer"
+            onClick={() => window.open("https://www.gelato.network/", "_blank")}
+          >
             <Image
               src="/gelato-logo.svg"
               alt="logo"

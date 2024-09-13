@@ -1,6 +1,6 @@
 Hey there! Welcome to the Rollup Explorer.
 
-This project is a simple web app that allows you to explore the rollup transactions and balances of the Ethereum blockchain. It is built with Next.js, TailwindCSS, and uses the viem, wagmi, and rainbowkit libraries to interact with the blockchain.
+This project is a simple web app that allows you to explore rollup transactions using Gelato's API. It's built with Next.js, TailwindCSS, and uses viem, wagmi, and rainbow-kit libraries to interact with the blockchain.
 
 ## Running the app
 1. Clone the repository
