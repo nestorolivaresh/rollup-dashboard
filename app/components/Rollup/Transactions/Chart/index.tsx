@@ -22,14 +22,15 @@ export const Chart: React.FC = () => {
     () => ({
       chart: {
         type: "bar",
-        height: 240,
+        height: '100%',
+        parentHeightOffset: 0,
         toolbar: {
           show: false,
         },
       },
       responsive: [
         {
-          breakpoint: 480,
+          breakpoint: 780,
           options: {
             chart: {
               width: "100%",
@@ -147,7 +148,7 @@ export const Chart: React.FC = () => {
   }
 
   return (
-    <div className="w-full sm:h-[250px] cursor-pointer">
+    <div className="w-full h-[300px] md:h-[250px] cursor-pointer">
       <ApexChart
         options={options}
         series={series}

@@ -25,10 +25,10 @@ export const Transactions = () => {
       <div className="w-full mt-4">
         {loadingTransactionsData || loadingRollupData ? (
           <div className="w-full h-40 sm:h-60">
-            <Skeleton className="w-full h-40 sm:h-60" />
+            <Skeleton className="w-full h-60 sm:h-60" />
           </div>
         ) : (
-          <div className="w-full h-40 sm:h-60">
+          <div className="w-full min-h-[250px]">
             <Chart />
           </div>
         )}
