@@ -4,14 +4,14 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { Button } from "../Button";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import { useDisconnect } from "wagmi";
 import { useState } from "react";
 import { Tooltip } from "react-tooltip";
+import { useDisconnectAll } from "@/app/hooks/useDisconnectsAll";
 
 export const Header = () => {
   const pathname = usePathname();
-  const { disconnect } = useDisconnect();
   const [isCopied, setIsCopied] = useState(false);
+  const { disconnectsAll } = useDisconnectAll();
 
   const handleClickAddress = async (address: string) => {
     try {
@@ -84,7 +84,7 @@ export const Header = () => {
                           {account.displayName}
                         </Button>
                         <Button
-                          onClick={() => disconnect()}
+                          onClick={() => disconnectsAll()}
                           className="w-full sm:w-[150px] text-xs sm:text-sm py-2 px-3 sm:py-2 sm:px-4 border border-[#272727] rounded-lg hover:border-[#807872] bg-transparent text-white"
                         >
                           Disconnect
